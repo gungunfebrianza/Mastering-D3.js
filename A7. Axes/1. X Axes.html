@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>X Axes</title>
+  <script type="text/javascript" src="../lib/d3.js"></script>
+</head>
+
+<body>
+  <script>
+    var width = 400,
+      height = 100;
+
+    var data = [10, 15, 20, 25, 30];
+
+    // Append SVG
+    var svg = d3.select("body")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+    // Create scale
+    var scale = d3.scaleLinear()
+      .domain([d3.min(data), d3.max(data)])
+      .range([0, width - 100]);
+
+    // Add scales to axis
+    var x_axis = d3.axisBottom()
+      .scale(scale);
+
+    //Append group and insert axis
+    svg.append("g")
+      .call(x_axis);
+  </script>
+</body>
+
+</html>
