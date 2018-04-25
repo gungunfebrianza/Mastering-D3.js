@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Datum</title>
+  <script type="text/javascript" src="../lib/d3.js"></script>
+</head>
+
+<body>
+  <p>D3 Tutorials</p>
+  <script>
+    d3.select("body")
+      .select("p")
+      .datum(100)
+      //The datum() function is used for static visualization which does not need updates. It binds data directly to an element. 
+      .text(function(d, i) {
+        return d;
+      });
+  </script>
+</body>
+
+</html>
