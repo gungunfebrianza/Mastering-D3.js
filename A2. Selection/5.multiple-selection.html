@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Multiple Selection</title>
+  <style>
+  .box {
+      width: 200px;
+      height: 200px;
+      margin: 40px;
+      float: left;
+      text-align: center;
+      border: #969696 solid thin;
+      padding: 5px;
+  }
+
+  .red {
+      background-color: #e9967a;
+      color: #f0f8ff;
+  }
+  </style>
+  <script type="text/javascript" src="../lib/d3.js"></script>
+</head>
+
+<body>
+
+  <div></div>
+  <div></div>
+  <div class="Test">
+    <span>
+      <p>
+        <a>1</a>
+        <a>2</a>
+        <a>3</a>
+      </p>
+    </span>
+  </div>
+
+  <script type="text/javascript">
+    d3.select("div.Test")
+      .html("<h1> Style 1</h1>");
+
+    d3.select("div.Test").select("span").select("p").selectAll("a")
+      .text("<h1> Style 2</h1>");
+
+    d3.select("div.Test").select("span").select("p").select("a")
+      .text("<h1> Style 3</h1>");
+
+    d3.selectAll("div")
+      .attr("class", "red box");
+  </script>
+
+</body>
+
+</html>
