@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Event onblur</title>
+    <script type="text/javascript" src="../lib/d3.js"></script>
+  </head>
+  <body>
+    Enter your name: <input type="text" name="fname" id="fname">
+
+    <p>When you leave the input field, it will transforms the input text to upper case.</p>
+
+    <script>
+    var inputobject = d3.select("#fname");
+    var inputobject2 = document.getElementById("fname");
+
+    d3.select("input").on("blur", function(){
+      // fail inputobject.attr('value', this.value.toUpperCase());
+      //fail inputobject.html("<html><input type='text' name='fname' id='fname' value='" + this.value.toUpperCase() + "'></html>")
+      inputobject.property("value", this.value.toUpperCase());
+      console.log(inputobject);
+      //inputobject2.value = this.value.toUpperCase();
+    })
+
+    </script>
+  </body>
+</html>
