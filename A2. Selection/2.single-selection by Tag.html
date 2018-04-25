@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Single Selection By Tag</title>
+  <script type="text/javascript" src="../lib/d3.js"></script>
+</head>
+
+<body>
+  <div>
+    1
+    <div>
+      2
+    </div>
+  </div>
+
+  <div>
+    3
+  </div>
+
+  <script>
+    alert(d3.select("div").select("div").text());
+  </script>
+</body>
+
+</html>

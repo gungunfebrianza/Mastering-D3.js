@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Single Selection by Class</title>
+    <script type="text/javascript" src="../lib/d3.js"></script>
+</head>
+
+   <body>
+      <div class = "myclass">
+         Hello World!
+      </div>
+
+      <div class = "myclass">
+         Hello !
+      </div>
+
+      <script>
+         alert(d3.select(".myclass").text());
+      </script>
+   </body>
+</html>
