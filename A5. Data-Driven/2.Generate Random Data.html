@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Generate Random Data</title>
+  <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+  <script type="text/javascript" src="../lib/d3.js"></script>
+</head>
+
+<body>
+
+  <div></div>
+  <div></div>
+  <div></div>
+
+  <script type="text/javascript">
+    //generate array
+    var arr = [];
+    for (arr, i = 0; i < 10; ++i) arr[i] = i;
+
+    function shuffle(array) {
+      var tmp, current, top = array.length;
+      if (top)
+        while (--top) {
+          current = Math.floor(Math.random() * (top + 1));
+          tmp = array[current];
+          array[current] = array[top];
+          array[top] = tmp;
+        }
+      return array;
+    }
+
+    arr = shuffle(arr);
+    console.log(arr);
+
+    function randomValue() {
+        return Math.round(Math.random() * 100);
+    }
+    console.log(randomValue());
+
+    function getRandomArbitrary(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+    console.log(getRandomArbitrary(1,39));
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+        console.log(getRandomInt(10,19));
+  </script>
+
+</body>
+
+</html>

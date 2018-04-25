@@ -1,0 +1,46 @@
+[
+    {
+        "expense": 15,
+        "category": "Minyak"
+    },
+    {
+        "expense": 18,
+        "category": "Gas"
+    },
+    {
+        "expense": 10,
+        "category": "Minyak"
+    },
+    {
+        "expense": 25,
+        "category": "Gas"
+    },
+    {
+        "expense": 66,
+        "category": "Minyak"
+    },
+    {
+        "expense": 70,
+        "category": "Gas"
+    },
+    {
+        "expense": 44,
+        "category": "Kayu"
+    },
+    {
+        "expense": 13,
+        "category": "Kayu"
+    },
+    {
+        "expense": 20,
+        "category": "Kayu"
+    },
+    {
+        "expense": 12,
+        "category": "Minyak"
+    },
+    {
+        "expense": 15,
+        "category": "Gas"
+    }
+]
