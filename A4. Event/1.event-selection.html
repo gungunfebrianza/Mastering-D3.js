@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Event Selection</title>
+  <script type="text/javascript" src="../lib/d3.js"></script>
+</head>
+
+<body>
+
+  <p id="target">Test</p>
+  <!-- A -->
+
+  <script type="text/javascript">
+    d3.select("p#target") // <-- B
+      .text("Hello world!"); // <-- C
+
+    d3.selectAll("p").on("click", function() {
+      d3.select(this).style("color", "red");
+    });
+  </script>
+
+</body>
+
+</html>
