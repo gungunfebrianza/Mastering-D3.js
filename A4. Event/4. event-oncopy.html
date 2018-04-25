@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Event oncopy</title>
+    <script type="text/javascript" src="../lib/d3.js"></script>
+  </head>
+  <body>
+    <input type="text" value="Try to copy this text">
+
+    <p id="demo"></p>
+
+    <script>
+    d3.select("input").on("copy", function() {
+      d3.select("#demo").html("You copied text!")
+    })
+    </script>
+  </body>
+</html>
