@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<meta charset="utf-8">
+<title>Filter</title>
+<script type="text/javascript" src="../lib/d3.js"></script>
+<style>
+  #borderdiv {
+    width: 200px;
+    height: 50px;
+    border: 1px solid gray;
+  }
+</style>
+<body>
+
+  <script>
+    var someNumbers = [17, 82, 9, 500, 40];
+    var smallerNumbers = someNumbers
+
+      .filter(function(el) {
+        return el >= 40 ? this : null;
+      });
+
+    d3.select("body")
+    .selectAll("p")
+    .data(smallerNumbers)
+    .enter().append("p")
+      .text(function(d) {
+        return d;
+      });
+  </script>
+</body>
+</html>
