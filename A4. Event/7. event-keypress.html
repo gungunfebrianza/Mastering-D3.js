@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Event On Keypress</title>
+  <script type="text/javascript" src="../lib/d3.js"></script>
+</head>
+
+<body>
+
+  <p>A function is triggered when the user is pressing a key in the input field.</p>
+
+  <input type="text">
+
+  <script>
+    d3.select("input").on("keypress", function() {
+      alert("You pressed a key inside the input field");
+    })
+  </script>
+
+</body>
+
+</html>
