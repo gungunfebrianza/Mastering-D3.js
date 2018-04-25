@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Event ontoggle</title>
+    <script type="text/javascript" src="../lib/d3.js"></script>
+  </head>
+  <body>
+    <p>Open the details.</p>
+
+    <details ontoggle="myFunction()">
+      <summary>Copyright 1999-2014.</summary>
+      <p> - by Refsnes Data. All Rights Reserved.</p>
+      <p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
+    </details>
+
+    <p><strong>Note:</strong> The details element and the ontoggle attribute is currently only supported in Chrome, Safari 6+, and Opera 15+.</p>
+
+    <script>
+      function myFunction() {
+        alert("The ontoggle event occured");
+      }
+    </script>
+
+  </body>
+</html>
