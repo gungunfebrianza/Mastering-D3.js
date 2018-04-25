@@ -10,11 +10,11 @@
 <body>
 
   <p id="target">Test</p>
-  <!-- A -->
 
   <script type="text/javascript">
-    d3.select("p#target") // <-- B
-      .text("Hello world!"); // <-- C
+    var pobject = d3.select("p#target");
+    console.log(pobject);
+    pobject.text("Hello world!");
   </script>
 
 </body>
