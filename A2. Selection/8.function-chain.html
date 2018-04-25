@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Selection Function Chain</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      margin: 40px;
+      float: left;
+      text-align: center;
+      border: #969696 solid thin;
+      padding: 5px;
+    }
+
+    .red {
+      background-color: #e9967a;
+      color: #f0f8ff;
+    }
+
+    .blue {
+      background-color: #add8e6;
+      color: #f0f8ff;
+    }
+  </style>
+  <script type="text/javascript" src="../lib/d3.js"></script>
+</head>
+
+<body>
+
+  <script type="text/javascript">
+    var body = d3.select("body"); // <-- A
+
+    body.append("section") // <-- B
+      .attr("id", "section1") // <-- C
+      .append("div") // <-- D
+      .attr("class", "blue box") // <-- E
+      .append("p") // <-- F
+      .text("dynamic blue box"); // <-- G
+
+    body.append("section")
+      .attr("id", "section2")
+      .append("div")
+      .attr("class", "red box")
+      .append("p")
+      .text("dynamic red box");
+
+    //var divObject = d3.selectAll("div");
+    //var divObjectwithData = divObject.data(someData);
+    //var objectEnter = divObjectwithData.enter();
+    //var objectAppend = objectEnter.append("div");
+    //objectAppend.html("Wow");
+  </script>
+
+</body>
+
+</html>
