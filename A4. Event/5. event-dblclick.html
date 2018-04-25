@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Event Double Click</title>
+  <script type="text/javascript" src="../lib/d3.js"></script>
+</head>
+
+<body>
+  <p id="demo" ondblclick="myFunction()">Double-click me to change my text color.</p>
+
+  <p>A function is triggered when the p element is double-clicked. The function sets the color of the p element to red.</p>
+
+  <script>
+    d3.select("p").on("dblclick", function() {
+      d3.select("#demo").style("color", "red");
+    });
+  </script>
+</body>
+
+</html>
