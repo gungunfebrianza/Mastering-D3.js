@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Control Rotation</title>
+  <script type="text/javascript" src="../lib/d3.js"></script>
+</head>
+
+<body>
+  <p>
+    <label for="nValue" style="display: inline-block; width: 240px; text-align: right">
+         angle = <span id="nValue-value"></span>
+  </label>
+    <input type="number" min="0" max="360" step="5" value="0" id="nValue">
+  </p>
+
+  <script>
+    var width = 600;
+    var height = 300;
+
+    var holder = d3.select("body")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+    // draw the element
+    holder.append("text")
+      .style("fill", "black")
+      .style("font-size", "56px")
+      .attr("dy", ".35em")
+      .attr("text-anchor", "middle")
+      .attr("transform", "translate(300,150) rotate(0)")
+      .text("d3noob.org");
+
+    // when the input range changes update value
+    d3.select("#nValue").on("input", function() {
+      update(+this.value);
+    });
+
+    // Initial update value
+    update(0);
+
+    // adjust the text
+    function update(nValue) {
+
+      // adjust the value
+      holder.select("text")
+        .attr("transform", "translate(300,110) rotate(" + nValue + ")");
+    }
+  </script>
+</body>
+
+</html>
