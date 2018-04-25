@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Sub-Selection</title>
+    <script type="text/javascript" src="../lib/d3.js"></script>
+    <style>
+    .box {
+        width: 200px;
+        height: 200px;
+        margin: 40px;
+        float: left;
+        text-align: center;
+        border: #969696 solid thin;
+        padding: 5px;
+    }
+
+    .red {
+        background-color: #e9967a;
+        color: #f0f8ff;
+    }
+    .blue {
+        background-color: #add8e6;
+        color: #f0f8ff;
+    }
+    </style>
+</head>
+
+<body>
+
+<section id="section1">
+    <div>
+        <p>blue box</p>
+    </div>
+</section>
+<section id="section2">
+    <div>
+        <p>red box</p>
+    </div>
+</section>
+
+<script type="text/javascript">
+    d3.select("#section1 > div") // <-- A
+            .attr("class", "blue box");
+
+    d3.select("#section2") // <-- B
+            .select("div") // <-- C
+            .attr("class", "red box");
+</script>
+
+</body>
+</html>
