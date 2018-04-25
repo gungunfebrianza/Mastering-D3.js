@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Single Selection By classed()</title>
+  <script type="text/javascript" src="../lib/d3.js"></script>
+</head>
+
+   <body>
+      <div class = "test tost">
+        Check Console Log!
+      </div>
+
+      <script>
+
+         console.log(d3.select("div").classed("test"));
+         d3.select("div").classed("tested", true);
+         d3.select("div").classed("tost", false);
+
+      </script>
+   </body>
+</html>
