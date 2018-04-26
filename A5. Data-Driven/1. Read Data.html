@@ -14,6 +14,15 @@
   <div></div>
 
   <script type="text/javascript">
+    /*notes
+    Changes in D3 5.0
+    Note that you don’t need to rethrow the error—the promise will reject automatically
+
+    you can promise.catch if desired. Using await, the code is even simpler:
+    const data = await d3.csv("file.csv");
+    console.log(data);
+
+    */
     d3.csv("http://localhost/front-end/mastering-d3/data/data.csv", function(data) {
       console.log(data);
     });
