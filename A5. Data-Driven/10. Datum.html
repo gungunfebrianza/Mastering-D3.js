@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Datum</title>
-  <script type="text/javascript" src="../lib/d3.js"></script>
+  <script type="text/javascript" src="../lib/d3v4.js"></script>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
     d3.select("body")
       .select("p")
       .datum(100)
-      //The datum() function is used for static visualization which does not need updates. It binds data directly to an element. 
+      //The datum() function is used for static visualization which does not need updates. It binds data directly to an element.
       .text(function(d, i) {
         return d;
       });

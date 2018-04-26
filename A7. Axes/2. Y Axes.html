@@ -1,31 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Y Axes</title>
-    <script type="text/javascript" src="../lib/d3.js"></script>
-  </head>
-  <body>
-    <script>
-    var width = 100, height = 400;
+
+<head>
+  <meta charset="utf-8">
+  <title>Y Axes</title>
+<script type="text/javascript" src="../lib/d3v4.js"></script>
+</head>
+
+<body>
+  <script>
+  /*
+  Notes :
+  Regardless of orientation, axes are always rendered at the origin.
+  To change the position of the axis with respect to the chart, specify a
+  transform attribute on the containing element.
+  For example:
+
+  d3.select("body").append("svg")
+    .attr("width", 1440)
+    .attr("height", 30)
+  .append("g")
+    .attr("transform", "translate(0,30)")
+    .call(axis);
+  */
+    var width = 100,
+      height = 400;
 
     var data = [10, 15, 20, 25, 30];
     var svg = d3.select("body")
-                .append("svg")
-                .attr("width", width)
-                .attr("height", height);
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height);
 
     var scale = d3.scaleLinear()
-                  .domain([d3.min(data), d3.max(data)])
-                  .range([height-20, 0]);
+      .domain([d3.min(data), d3.max(data)])
+      .range([height - 20, 0]);
 
     var y_axis = d3.axisLeft()
-                  .scale(scale);
+      .scale(scale);
 
     svg.append("g")
-       .attr("transform", "translate(50, 10)")
-       .call(y_axis);
+      .attr("transform", "translate(50, 10)")
+      .call(y_axis);
+  </script>
+</body>
 
-</script>
-  </body>
 </html>

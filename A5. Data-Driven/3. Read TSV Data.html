@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Read Data TSV</title>
+  <script type="text/javascript" src="../lib/d3v4.js"></script>
+</head>
+
+<body>
+
+  <div></div>
+  <div></div>
+  <div></div>
+
+  <script type="text/javascript">
+    d3.tsv("http://localhost/front-end/mastering-d3/data/data.tsv", function(error, data) {
+      if (error) throw error;
+      console.log(data);
+    });
+    d3.tsv("http://localhost/front-end/mastering-d3/data/data.tsv", data => console.log(data));
+  </script>
+
+</body>
+
+</html>

@@ -2,7 +2,7 @@
 <html>
 <meta charset="utf-8">
 <title>Filter</title>
-<script type="text/javascript" src="../lib/d3.js"></script>
+<script type="text/javascript" src="../lib/d3v4.js"></script>
 <style>
   #borderdiv {
     width: 200px;
@@ -10,6 +10,7 @@
     border: 1px solid gray;
   }
 </style>
+
 <body>
 
   <script>
@@ -21,12 +22,13 @@
       });
 
     d3.select("body")
-    .selectAll("p")
-    .data(smallerNumbers)
-    .enter().append("p")
+      .selectAll("p")
+      .data(smallerNumbers)
+      .enter().append("p")
       .text(function(d) {
         return d;
       });
   </script>
 </body>
+
 </html>
