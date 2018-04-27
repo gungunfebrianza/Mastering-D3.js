@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Control Circles</title>
+  <script type="text/javascript" src="../lib/dat.min.js"></script>
+</head>
+
+<body>
+  <svg height="1200" width="1200">
+      <circle cx="270" cy="250" r="40" stroke="black" stroke-width="3" fill="red" />
+      Sorry, your browser does not support inline SVG.
+    </svg>
+</body>
+<script type="text/javascript">
+  var data = document.getElementsByTagName('circle')[0];
+  var circle;
+
+  var ocircle = function() {
+    this.fill = "#ff0000";
+    this.r = 40;
+    this.cx = 270;
+    this.cy = 250;
+    this.stroke = false;
+    this.strokewidth = 3;
+  };
+
+  window.onload = function() {
+    console.log(data);
+    circle = new ocircle();
+    setValue();
+    var gui = new dat.GUI();
+    gui.addColor(circle, 'fill').onChange(setValue);
+    gui.add(circle, 'r', 1, 999).onChange(setValue);
+    gui.add(circle, 'cx', 1, 999).onChange(setValue);
+    gui.add(circle, 'cy', 1, 999).onChange(setValue);
+    gui.add(circle, 'stroke').onChange(setValue);
+    gui.add(circle, 'strokewidth', 1, 9).onChange(setValue);
+  };
+
+  function setValue() {
+    data.setAttribute("fill", circle.fill);
+    data.setAttribute("r", circle.r);
+    data.setAttribute("cx", circle.cx);
+    data.setAttribute("cy", circle.cy);
+    data.setAttribute("strokewidth", circle.strokewidth);
+    if (circle.stroke) {
+      data.setAttribute("stroke", "white");
+    } else {
+      data.setAttribute("stroke", "black");
+    }
+  }
+</script>
+
+</html>
