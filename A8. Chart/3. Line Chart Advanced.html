@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Line Chart</title>
+  <script type="text/javascript" src="../lib/d3v4l.js"></script>
+  <style>
+    path {
+      fill: none;
+      stroke: #3999;
+      stroke-width: 4;
+    }
+  </style>
+</head>
+
+<body>
+  <select>
+    <option value="0">curveBasis</option>
+    <option value="1">curveBasisClosed</option>
+    <option value="2">curveBasisOpen</option>
+    <option value="3">curveBundle</option>
+    <option value="4">curveCardinal</option>
+    <option value="5">curveCardinalClosed</option>
+    <option value="6">curveCardinalOpen</option>
+    <option value="7">curveCatmullRom</option>
+    <option value="8">curveCatmullRomClosed</option>
+    <option value="9">curveCatmullRomOpen</option>
+    <option value="10">curveLinear</option>
+    <option value="11">curveLinearClosed</option>
+    <option value="12">curveMonotoneX</option>
+    <option value="13">curveMonotoneY</option>
+    <option value="14">curveNatural</option>
+    <option value="15">curveStep</option>
+    <option value="16">curveStepAfter</option>
+    <option value="17">curveStepBefore</option>
+  </select>
+  <svg width="1700" height="1110">
+      <path y="300"></path>
+    </svg>
+</body>
+<script>
+  var lineGenerator = d3.line();
+  lineGenerator.curve(d3.curveBasis);
+
+  var points = [
+    [0, 80],
+    [100, 100],
+    [200, 30],
+    [300, 50],
+    [400, 40],
+    [500, 80]
+  ];
+
+  d3.select("select").on("change", function() {
+    switch (this.value) {
+      case "0":
+        lineGenerator.curve(d3.curveBasis);
+        break;
+      case "1":
+        lineGenerator.curve(d3.curveBasisClosed);
+        break;
+      case "2":
+        lineGenerator.curve(d3.curveBasisOpen);
+        break;
+      case "3":
+        lineGenerator.curve(d3.curveBundle);
+        break;
+      case "4":
+        lineGenerator.curve(d3.curveCardinal);
+        break;
+      case "5":
+        lineGenerator.curve(d3.curveCardinalClosed);
+        break;
+      case "6":
+        lineGenerator.curve(d3.curveCardinalOpen);
+        break;
+      case "7":
+        lineGenerator.curve(d3.curveCatmullRom);
+        break;
+      case "8":
+        lineGenerator.curve(d3.curveCatmullRomClosed);
+        break;
+      case "9":
+        lineGenerator.curve(d3.curveCatmullRomOpen);
+        break;
+      case "10":
+        lineGenerator.curve(d3.curveLinear);
+        break;
+      case "11":
+        lineGenerator.curve(d3.curveLinearClosed);
+        break;
+      case "12":
+        lineGenerator.curve(d3.curveMonotoneX);
+        break;
+      case "13":
+        lineGenerator.curve(d3.curveMonotoneY);
+        break;
+      case "14":
+        lineGenerator.curve(d3.curveNatural);
+        break;
+      case "15":
+        lineGenerator.curve(d3.curveStep);
+        break;
+      case "16":
+        lineGenerator.curve(d3.curveStepAfter);
+        break;
+      case "17":
+        lineGenerator.curve(d3.curveStepBefore);
+        break;
+      default:
+        lineGenerator.curve(d3.curveBasis);
+    }
+  })
+
+
+  function render(data) {
+    var pathData = lineGenerator(points);
+    d3.select('path')
+      .attr('d', pathData);
+
+  }
+
+  setInterval(function() {
+    points.shift();
+    points.push([Math.round(Math.random() * 1200), Math.round(Math.random() * 1200)]);
+    render(points);
+  }, 290);
+
+  render(points);
+</script>
+
+</html>
