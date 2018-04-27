@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>GUI Dat</title>
+  <script type="text/javascript" src="../lib/dat.min.js"></script>
+</head>
+
+<body>
+    <p id="data"></p>
+</body>
+<script type="text/javascript">
+  var data = document.getElementById('data');
+  var text;
+
+  var sampleText = function() {
+    this.message = "Dat GUI";
+    this.color = "#ff0000";
+    this.fontSize = 24;
+    this.border = false;
+    this.fontFamily = "sans-serif";
+  };
+
+  window.onload = function() {
+    text = new sampleText();
+    setValue();
+    var gui = new dat.GUI();
+    gui.add(text, 'message').onChange(setValue);
+    gui.addColor(text, 'color').onChange(setValue);
+    gui.add(text, 'fontSize', 6, 48).onChange(setValue);
+    gui.add(text, 'border').onChange(setValue);
+    gui.add(text, 'fontFamily', ["sans-serif", "serif", "cursive", "ï¼­ï¼³ æ˜Žæœ", "monospace"]).onChange(setValue);
+  };
+
+  //è¨­å®šæ›´æ–°å‡¦ç†
+  function setValue() {
+    data.innerHTML = text.message;
+    data.style.color = text.color;
+    data.style.fontSize = text.fontSize + "px";
+    data.style.fontFamily = text.fontFamily;
+    if (text.border) {
+      data.style.border = "solid 1px black";
+      data.style.padding = "10px";
+    } else {
+      data.style.border = "none";
+      data.style.padding = "0px";
+    }
+  }
+</script>
+
+</html>

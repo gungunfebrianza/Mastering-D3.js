@@ -8,43 +8,33 @@
   <body>
     <script>
     var svgwidth = 400, svgheight = 400;
-
     var data = [10, 15, 20, 25, 30];
-
     //make the svg
     var svg = d3.select("body")
                 .append("svg")
                 .attr("width", svgwidth)
                 .attr("height", svgheight);
-
     //in XScale -100 to prevent overflow
     var xscale = d3.scaleLinear()
                    .domain([0, d3.max(data)])
                    .range([0, svgwidth - 100]);
-
     //in YScale divided by 2 to prevent overflow
     var yscale = d3.scaleLinear()
                    .domain([0, d3.max(data)])
                    .range([svgheight - 100, 0]);
-
     var x_axis = d3.axisBottom()
                    .scale(xscale);
-
     var y_axis = d3.axisLeft()
                    .scale(yscale);
-
     svg.append("g")
        .attr("transform", "translate(50, 10)") //Add +10 padding y scale
        .call(y_axis);
-
     //svg weight = 400 - 100 = 300 (size Y Scale)
-    //Size Y Scale + Padding = 300 + 10 = 310   
+    //Size Y Scale + Padding = 300 + 10 = 310
     var xAxisTranslate = svgheight - 90; //position of x Axis 400-90 = 310
-
     svg.append("g")
             .attr("transform", "translate(50, " + xAxisTranslate  +")")
             .call(x_axis)
-
 </script>
   </body>
 </html>
