@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Line Chart</title>
+  <script type="text/javascript" src="../lib/d3v4l.js"></script>
+  <style>
+    path {
+      fill: none;
+      stroke: #999;
+      stroke-width: 4;
+    }
+  </style>
+</head>
+
+<body>
+  <svg width="1700" height="1110">
+      <path y="300"></path>
+    </svg>
+</body>
+<script>
+  var lineGenerator = d3.line();
+  var points = [
+    [0, 80],
+    [100, 100],
+    [200, 30],
+    [300, 50],
+    [400, 40],
+    [500, 80]
+  ];
+
+
+  function render(data) {
+    var pathData = lineGenerator(points);
+    d3.select('path')
+      .attr('d', pathData);
+
+  }
+
+  setInterval(function() {
+    points.shift();
+    points.push([Math.round(Math.random() * 1200), Math.round(Math.random() * 1200)]);
+    render(points);
+  }, 290);
+
+  render(points);
+</script>
+
+</html>
