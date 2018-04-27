@@ -14,6 +14,12 @@
   <div></div>
 
   <script type="text/javascript">
+    var arrdata = [];
+    for (var i = 0; i < 10; i++) {
+      var newNumber = Math.random();
+      arrdata.push(newNumber);
+    }
+    
     //generate array
     var arr = [];
     for (arr, i = 0; i < 10; ++i) arr[i] = i;
@@ -34,19 +40,19 @@
     console.log(arr);
 
     function randomValue() {
-        return Math.round(Math.random() * 100);
+      return Math.round(Math.random() * 100);
     }
     console.log(randomValue());
 
     function getRandomArbitrary(min, max) {
       return Math.random() * (max - min) + min;
     }
-    console.log(getRandomArbitrary(1,39));
+    console.log(getRandomArbitrary(1, 39));
 
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-        console.log(getRandomInt(10,19));
+    console.log(getRandomInt(10, 19));
   </script>
 
 </body>
