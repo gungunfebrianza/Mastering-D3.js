@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Line Transition</title>
+  <script type="text/javascript" src="../lib/d3v4l.js"></script>
+  <style>
+    .line {
+      fill: none;
+      stroke: #000;
+      stroke-width: 1.5px;
+    }
+  </style>
+</head>
+
+<body>
+  <svg width="960" height="500"></svg>
+</body>
+<script>
+  var n = 40,
+    random = d3.randomNormal(0, .2),
+    data = d3.range(n).map(random);
+
+  var svg = d3.select("svg"),
+    margin = {
+      top: 20,
+      right: 20,
+      bottom: 20,
+      left: 40
+    },
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var x = d3.scaleLinear()
+    .domain([0, n - 1])
+    .range([0, width]);
+
+  var y = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([height, 0]);
+
+  var line = d3.line()
+    .x(function(d, i) {
+      return x(i);
+    })
+    .y(function(d, i) {
+      return y(d);
+    });
+
+  g.append("g")
+    .attr("class", "axis axis--x")
+    .attr("transform", "translate(0," + y(0) + ")")
+    .call(d3.axisBottom(x));
+
+  g.append("g")
+    .attr("class", "axis axis--y")
+    .call(d3.axisLeft(y));
+
+  g.append("path")
+    .datum(data)
+    .attr("class", "line")
+    .attr("d", line)
+    .transition()
+    .duration(500)
+    .ease(d3.easeLinear)
+    .on("start", tick);
+
+  function tick() {
+
+    // Push a new data point onto the back.
+    data.push(random());
+
+    // Pop the old data point off the front.
+    data.shift();
+
+    // Redraw the line (with the wrong interpolation).
+    d3.active(this)
+      .attr("d", line)
+      .transition()
+      .on("start", tick);
+
+  }
+</script>
+
+</html>
