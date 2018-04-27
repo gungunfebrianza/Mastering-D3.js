@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Absolute Positioned Tooltip</title>
+  <script type="text/javascript" src="../lib/d3v4l.js"></script>
+  <style>
+    .tooltip {
+      position: absolute;
+      text-align: center;
+      width: 60px;
+      height: 12px;
+      padding: 8px;
+      margin-top: -20px;
+      font: 10px sans-serif;
+      background: #ddd;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+
+</body>
+<script>
+  var width = 960,
+    height = 500;
+
+  var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+  svg.append("g")
+    .attr("transform", "translate(480,50) rotate(60) scale(2)")
+    .append("rect")
+    .attr("width", 140)
+    .attr("height", 140)
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseout", mouseout);
+
+  var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("display", "none");
+
+  function mouseover() {
+    div.style("display", "inline");
+  }
+
+  function mousemove() {
+    div
+      .text(d3.event.pageX + ", " + d3.event.pageY)
+      .style("left", (d3.event.pageX - 34) + "px")
+      .style("top", (d3.event.pageY - 12) + "px");
+  }
+
+  function mouseout() {
+    div.style("display", "none");
+  }
+</script>
+
+</html>
