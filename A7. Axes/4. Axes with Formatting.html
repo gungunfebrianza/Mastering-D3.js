@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Axes With Formatting</title>
+  <script type="text/javascript" src="../lib/d3v4l.js"></script>
+  <style>
+    path {
+      fill: none;
+      stroke: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+  <svg width="200" height="670">
+    <g class="axis" transform="translate(20, 20)" />
+  </svg>
+
+  <script>
+    var scale = d3.scaleLinear().domain([0, 1000000]).range([0, 600]);
+    var format = d3.format(",");
+
+    var axis = d3.axisRight().scale(scale)
+      .tickFormat(function(d) {
+        return '£' + format(d);
+      })
+      .ticks(10);
+
+    d3.select('.axis')
+      .call(axis);
+  </script>
+</body>
+
+</html>
