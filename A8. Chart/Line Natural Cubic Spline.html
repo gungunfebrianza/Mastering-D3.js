@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Natural Cubic Spline</title>
+  <script type="text/javascript" src="../lib/d3v4l.js"></script>
+  <style>
+    path {
+      fill: none;
+      stroke: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+  <svg width="600" height="100">
+		<path transform="translate(200, 10)" />
+	</svg>
+</body>
+<script>
+  var data = [
+    [0, 50],
+    [100, 80],
+    [200, 40],
+    [300, 60],
+    [400, 30]
+  ];
+
+  var lineGenerator = d3.line()
+    .curve(d3.curveNatural);
+  var pathString = lineGenerator(data);
+
+  d3.select('path')
+    .attr('d', pathString);
+</script>
+
+</html>
