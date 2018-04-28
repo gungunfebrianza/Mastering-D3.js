@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>External SVG</title>
-    <script type="text/javascript" src="../lib/d3v4.js"></script>
-  </head>
-  <body>
 
-  </body>
-  <script>
+<head>
+  <meta charset="utf-8">
+  <title>External SVG</title>
+  <script type="text/javascript" src="../lib/d3v4l.js"></script>
+</head>
 
+<body>
+
+</body>
+<script>
   d3.xml("http://localhost/front-end/mastering-d3/data/rect.svg").mimeType("image/svg+xml").get(function(error, xml) {
     if (error) throw error;
     document.body.appendChild(xml.documentElement);
   });
+</script>
 
-  </script>
 </html>

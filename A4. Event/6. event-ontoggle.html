@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Event ontoggle</title>
-  <script type="text/javascript" src="../lib/d3v4.js"></script>
-  </head>
-  <body>
-    <p>Open the details.</p>
 
-    <details>
-      <summary>Copyright 1999-2014.</summary>
-      <p> - by Refsnes Data. All Rights Reserved.</p>
-      <p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
-    </details>
+<head>
+  <meta charset="utf-8">
+  <title>Event ontoggle</title>
+  <script type="text/javascript" src="../lib/d3v4l.js"></script>
+</head>
 
-    <p><strong>Note:</strong> The details element and the ontoggle attribute is currently only supported in Chrome, Safari 6+, and Opera 15+.</p>
+<body>
+  <p>Open the details.</p>
 
-    <script>
-    d3.select("details").on("toggle", function(){
+  <details>
+    <summary>Copyright 1999-2014.</summary>
+    <p> - by Refsnes Data. All Rights Reserved.</p>
+    <p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
+  </details>
+
+  <p><strong>Note:</strong> The details element and the ontoggle attribute is currently only supported in Chrome, Safari 6+, and Opera 15+.</p>
+
+  <script>
+    d3.select("details").on("toggle", function() {
       alert("The ontoggle event occured");
     })
-    </script>
+  </script>
 
-  </body>
+</body>
+
 </html>

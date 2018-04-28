@@ -1,29 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
   <meta charset="utf-8">
   <title>Input test (circle)</title>
-<script type="text/javascript" src="../lib/d3v4.js"></script>
+  <script type="text/javascript" src="../lib/d3v4l.js"></script>
 </head>
-  <body>
-    <p>
-      <label for="nRadius"
-             style="display: inline-block; width: 240px; text-align: right">
+
+<body>
+  <p>
+    <label for="nRadius" style="display: inline-block; width: 240px; text-align: right">
              radius = <span id="nRadius-value">…</span>
       </label>
-      <input type="range" min="1" max="250" id="nRadius">
-    </p>
+    <input type="range" min="1" max="250" id="nRadius">
+  </p>
 
-    <script>
-
+  <script>
     var width = 1600;
     var height = 1300;
 
     var holder = d3.select("body")
-          .append("svg")
-          .attr("width", width)
-          .attr("height", height);
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height);
 
     // draw the circle
     holder.append("circle")
@@ -52,7 +51,7 @@
       holder.selectAll("circle")
         .attr("r", nRadius);
     }
+  </script>
+</body>
 
-    </script>
-  </body>
 </html>
