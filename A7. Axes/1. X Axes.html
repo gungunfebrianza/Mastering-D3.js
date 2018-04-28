@@ -23,21 +23,21 @@
     .attr("transform", "translate(0,30)")
     .call(axis);
   */
-    var width = 400,
-      height = 100;
+    var svgwidth = 400,
+      svgheight = 100;
 
     var data = [10, 15, 20, 25, 30];
 
     // Append SVG
     var svg = d3.select("body")
       .append("svg")
-      .attr("width", width)
-      .attr("height", height);
+      .attr("width", svgwidth)
+      .attr("height", svgheight);
 
     // Create scale
     var scale = d3.scaleLinear()
       .domain([d3.min(data), d3.max(data)])
-      .range([0, width - 50]);
+      .range([0, svgwidth - 50]);
 
     // Add scales to axis
     var x_axis = d3.axisBottom()
