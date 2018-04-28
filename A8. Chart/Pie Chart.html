@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Pie Chart</title>
+  <script type="text/javascript" src="../lib/d3v4l.js"></script>
+  <style>
+    path {
+      fill: orange;
+      stroke: white;
+    }
+  </style>
+</head>
+
+<body>
+  <svg width="700" height="220">
+  	<g transform="translate(300, 110)"></g>
+  </svg>
+</body>
+<script>
+  var pieGenerator = d3.pie();
+  var data = [155, 80];
+  var arcData = pieGenerator(data);
+
+  var arcGenerator = d3.arc()
+    .innerRadius(20)
+    .outerRadius(90);
+
+  d3.select('g')
+    .selectAll('path')
+    .data(arcData)
+    .enter()
+    .append('path')
+    .attr('d', arcGenerator);
+</script>
+
+</html>
