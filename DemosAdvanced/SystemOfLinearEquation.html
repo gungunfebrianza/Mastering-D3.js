@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta name="description" content="equation of a line">
+  <meta charset="UTF-8">
+  <title>Equation of a line</title>
+  <script type="text/javascript" src="../lib/d3.js"></script>
+  <style>
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: black;
+    }
+
+    path.line {
+      fill: none;
+      stroke: black;
+      stroke-width: 1px;
+    }
+
+    .tick text {
+      font-size: 12px;
+    }
+
+    .tick line {
+      opacity: 0.2;
+    }
+  </style>
+</head>
+
+<body>
+
+</body>
+<script type="text/javascript">
+  var margin = {
+      top: 20,
+      right: 100,
+      bottom: 30,
+      left: 100
+    },
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+  var xScale = d3.scaleLinear()
+    .domain([0, 20])
+    .range([0, width]);
+
+  var yScale = d3.scaleLinear()
+    .domain([0, 20])
+    .range([height, 0]);
+
+  var xAxis = d3.axisBottom(xScale)
+                .tickPadding(10);
+
+    //.innerTickSize(-height)
+
+
+  var yAxis = d3.axisLeft(yScale)
+                .tickPadding(10);
+    //.innerTickSize(-width)
+    //.outerTickSize(0)
+    ;
+
+  var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+  svg.append("g")
+    .attr("class", "y axis")
+    .call(yAxis);
+
+  var line = {
+    start: {
+      x: 2,
+      y: 3,
+      type: 'start'
+    },
+    finish: {
+      x: 14,
+      y: 7,
+      type: 'finish'
+    }
+  };
+
+  var g = svg.append('g');
+
+  g.append('line')
+    .style('stroke', 'red')
+    .attr('class', 'line')
+    .attr('x1', xScale(line.start.x))
+    .attr('y1', yScale(line.start.y))
+    .attr('x2', xScale(line.finish.x))
+    .attr('y2', yScale(line.finish.y));
+
+  function equationOfLine(start, finish) {
+    var slope = (finish.y - start.y) / (finish.x - start.x);
+
+    var yIntercept = start.y - (slope * start.x);
+
+    if (slope === 0) {
+      return 'y = ' + start.y;
+    }
+
+    if (slope === -Infinity || slope === Infinity) {
+      return 'x = ' + start.x;
+    }
+
+    return 'y = ' + d3.format(",.2f")(slope) + 'x + ' + d3.format(",.2f")(yIntercept);
+  }
+
+  svg.append('text')
+    .attr('class', 'title')
+    .text(equationOfLine(line.start, line.finish))
+    .attr('x', xScale(2))
+    .attr('y', yScale(18))
+    .attr("font-family", "sans-serif")
+    .attr("font-size", "24px");
+
+  var lineData = [line.start, line.finish];
+
+  var drag = d3.drag()
+    .on("drag", function(d) {
+      var circle = d3.select(this),
+        line = d3.select('.line'),
+        isStart = circle.classed('start'),
+        textClass = isStart ? ".textstart" : ".textfinish",
+        lineX = isStart ? 'x1' : 'x2',
+        lineY = isStart ? 'y1' : 'y2',
+        text = d3.select(textClass),
+        title = d3.select('.title'),
+        xStart = d3.format(",.0f")(xScale.invert(line.attr('x1'))),
+        yStart = d3.format(",.0f")(yScale.invert(line.attr('y1'))),
+        xFinish = d3.format(",.0f")(xScale.invert(line.attr('x2'))),
+        yFinish = d3.format(",.0f")(yScale.invert(line.attr('y2')));
+
+      text.text(function(d) {
+        return "( " + d3.format(",.0f")(xScale.invert(d.x)) + ", " + d3.format(",.0f")(yScale.invert(d.y)) + " )";
+      });
+
+      line.attr(lineX, d3.event.x).attr(lineY, d3.event.y);
+      text.attr('x', d3.event.x).attr('y', d3.event.y - 20);
+      circle.attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+
+      title.text(equationOfLine({
+        x: xStart,
+        y: yStart
+      }, {
+        x: xFinish,
+        y: yFinish
+      }));
+    });
+
+  var circles = g
+    .selectAll('circle')
+    .data(lineData)
+    .enter().append("circle")
+    .attr('class', function(d) {
+      return "circle " + d.type;
+    })
+    .attr('cx', function(d) {
+      return xScale(d.x);
+    })
+    .attr('cy', function(d) {
+      return yScale(d.y);
+    })
+    .attr('r', 10)
+    .style('fill', 'green')
+    .call(drag);
+
+  var text = g
+    .selectAll('text')
+    .data(lineData)
+    .enter().append('text')
+    .attr("x", function(d) {
+      return xScale(d.x);
+    })
+    .attr("y", function(d) {
+      return yScale(d.y + 1);
+    })
+    .attr('class', function(d) {
+      return "text" + d.type;
+    })
+    .text(function(d) {
+      return "( " + d.x + ", " + d.y + " )";
+    })
+    .attr("font-family", "sans-serif")
+    .attr("font-size", "14px")
+    .attr("fill", "red");
+</script>
+
+</html>
