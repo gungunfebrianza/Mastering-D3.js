@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>CSS Bar Chat</title>
+  <script type="text/javascript" src="../lib/d3.js"></script>
+  <style>
+    .chart div {
+      min-height: 25px;
+      min-width: 24px;
+      background-color: steelblue;
+      margin-bottom: 4px;
+      font-size: 15px;
+      color: #f0f8ff;
+      text-align: right;
+      padding-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart">
+  </div>
+  <script type="text/javascript">
+    var data = [4, 8, 15, 16, 23, 42];
+    d3.select(".chart")
+      .selectAll("div")
+      .data(data)
+      .enter().append("div")
+      .style("width", function(d) {
+        return d * 10 + "px"; //magic number
+      })
+      .text(function(d) {
+        return d;
+      });
+  </script>
+</body>
+</html>
