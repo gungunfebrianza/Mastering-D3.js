@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.state-patterned-stripey { fill: url(#stripey); }
+.state-patterned-polkadot { fill: url(#polkadot); }
+
+#stripey rect { stroke: none; fill: #ffa; }
+#stripey path { stroke: #aff; }
+
+#polkadot rect { stroke: none; fill: #aaf; }
+#polkadot circle { fill: #faf; }
+
+
+.state-boundary {
+  fill: none;
+  stroke: #000;
+  stroke-width:1;
+  stroke-linejoin:round;
+  opacity:.2;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script>
+
+var width = 960,
+    height = 500;
+
+var patternSize = 20;
+
+var projection = d3.geo.albersUsa()
+    .scale(1000)
+    .translate([width / 2, height / 2]);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+
+var map = svg.append('g');
+
+var defs = svg.append('defs');
+
+var stripey  = newPattern('stripey',patternSize,defs);
+var polkadot = newPattern('polkadot',patternSize,defs);
+
+stripey.append('rect').attr({
+  'x': -patternSize,
+  'y': -patternSize,
+  'height': patternSize*3,
+  'width':  patternSize*3
+})
+stripey.append('path').attr({
+  'd': 'M-10,10 l30,-30 M0,'+patternSize+' l'+patternSize+',-'+patternSize+' M'+(patternSize-10)+','+(patternSize+10)+' l30,-30'
+})
+
+
+polkadot.append('rect').attr({
+  'x': -patternSize,
+  'y': -patternSize,
+  'height': patternSize*3,
+  'width':  patternSize*3
+})
+polkadot.append('circle').attr({
+  'r': 5,
+  'cx':patternSize/2,
+  'cy':patternSize/2
+})
+
+var patterns = ['stripey','polkadot']
+
+
+d3.json("/mbostock/raw/4090846/us.json", function(error, us) {
+
+  map.selectAll('path')
+      .data(topojson.feature(us, us.objects.states).features)
+      .enter().append("path")
+      .attr("class", function(d) {
+        var choice = Math.round(Math.random());
+        return "state-patterned-"+patterns[choice]
+      })
+      .attr("d", path);
+
+  map.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+      .attr("class", "state-boundary")
+      .attr("d", path);
+});
+
+d3.select('#stripey path').call(pulse,1000)
+d3.select('#polkadot circle').call(spin,700)
+
+
+function newPattern(name,size,defs) {
+  return defs.append('pattern').attr({
+    'id': name,
+    'patternUnits':'userSpaceOnUse',
+    'width': size,
+    'height':size
+    }).append('g');
+}
+
+function pulse(path,duration){
+  path.transition()
+      .duration(duration)
+      .attr('stroke-width',12)
+      .transition()
+      .attr('stroke-width',2)
+
+  setTimeout(function() { pulse(path, duration); }, duration*2);
+}
+
+function spin(path,duration) {
+  path.transition()
+    .duration(duration)
+    .attr('transform','rotate(180,10,5)').attr('r',1)
+    .transition()
+    .attr('transform','rotate(0,10,5)').attr('r',4)
+
+  setTimeout(function() { spin(path, duration); }, duration*2);
+}
+
+</script>
