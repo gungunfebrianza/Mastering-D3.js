@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Event onclick</title>
+  <script type="text/javascript" src="../lib/d3v4l.js"></script>
+</head>
+
+<body>
+
+</body>
+
+<script>
+  d3.select("body").append("div")
+    .style("border", "1px black solid")
+    .html("hello world");
+
+  d3.select("div")
+    .style("background-color", "pink")
+    .style("font-size", "24px")
+    .attr("id", "newDiv")
+    .attr("class", "d3div")
+    .on("click", () => {
+      console.log("You clicked a div")
+    });
+</script>
+
+</html>
