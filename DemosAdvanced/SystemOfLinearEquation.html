@@ -51,16 +51,16 @@
     .range([height, 0]);
 
   var xAxis = d3.axisBottom(xScale)
-                .tickPadding(10);
+    .tickPadding(10);
 
-    //.innerTickSize(-height)
+  //.innerTickSize(-height)
 
 
   var yAxis = d3.axisLeft(yScale)
-                .tickPadding(10);
-    //.innerTickSize(-width)
-    //.outerTickSize(0)
-    ;
+    .tickPadding(10);
+  //.innerTickSize(-width)
+  //.outerTickSize(0)
+  ;
 
   var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
