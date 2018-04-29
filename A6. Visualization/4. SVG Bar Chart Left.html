@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>SVG Bar Chart Left</title>
+  <script type="text/javascript" src="../lib/d3.js"></script>
+  <style>
+    .chart rect {
+      fill: steelblue;
+    }
+
+    .chart text {
+      fill: white;
+      font: 10px sans-serif;
+      text-anchor: end;
+    }
+
+    svg {
+      border-style: solid;
+    }
+  </style>
+</head>
+
+<body>
+  <svg class="chart"></svg>
+
+</body>
+<script>
+  var data = [4, 8, 15, 16, 23, 42];
+
+  var SVGheight = 150;
+  barHeight = 22,
+    barYPosition = 25;
+
+  var scale = d3.scaleLinear()
+    .domain([0, d3.max(data)]) //x axis
+    .range([0, d3.max(data) * 10]); //desired width of the chart 420
+
+  var SVGchart = d3.selectAll(".chart") //focus per element
+    .attr("width", d3.max(data) * 10) //width variable 420
+    .attr("height", SVGheight);
+
+  var bar = SVGchart.selectAll("g") //focus per element
+    .data(data)
+    .enter().append("g")
+    //transform
+    .attr("transform", function(d, i) {
+      return "translate(0," + i * barYPosition + ")";
+    });
+
+  bar.append("rect")
+    .attr("width", scale)
+    .attr("height", barHeight);
+
+  bar.append("text")
+    .attr("x", function(d) {
+      return scale(d) - 3;
+    })
+    .attr("y", barYPosition / 2)
+    .attr("dy", ".35em")
+    .text(function(d) {
+      return d;
+    });
+</script>
+
+</html>
