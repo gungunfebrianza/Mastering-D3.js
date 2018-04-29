@@ -14,13 +14,22 @@
   <div></div>
 
   <script type="text/javascript">
-
     d3.csv("http://localhost/front-end/mastering-d3/data/sample.csv", function(error, data) {
       if (error) throw error;
       console.log(data);
     });
 
-    d3.csv("http://localhost/front-end/mastering-d3/data/sample.csv", data => console.log(data));
+    d3.csv("http://localhost/front-end/mastering-d3/data/cities.csv", data => console.log(data));
+    d3.csv("http://localhost/front-end/mastering-d3/data/cities.csv", data => dataViz(data));
+
+    function dataViz(incomingData) {
+      d3.select("body").selectAll("div.cities")
+        .data(incomingData)
+        .enter()
+        .append("div")
+        .attr("class", "cities")
+        .html(d => d.label);
+    }
   </script>
 
 </body>
