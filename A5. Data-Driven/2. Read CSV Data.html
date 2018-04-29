@@ -19,8 +19,8 @@
       console.log(data);
     });
 
-    d3.csv("http://localhost/front-end/mastering-d3/data/cities.csv", data => console.log(data));
-    d3.csv("http://localhost/front-end/mastering-d3/data/cities.csv", data => dataViz(data));
+    d3.csv("http://localhost/front-end/mastering-d3.js/data/cities.csv", data => console.log(data));
+    d3.csv("http://localhost/front-end/mastering-d3.js/data/cities.csv", data => dataViz(data));
 
     function dataViz(incomingData) {
       d3.select("body").selectAll("div.cities")
