@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>SVG Bar Chart Top</title>
+  <script type="text/javascript" src="../lib/d3v4l.js"></script>
+  <style>
+    svg {
+      padding: 5px 5px;
+      border: 1px solid;
+    }
+  </style>
+</head>
+
+<body>
+  <svg>
+
+  </svg>
+</body>
+
+<script>
+  d3.csv("http://localhost/front-end/mastering-d3.js/data/cities.csv", data => dataViz(data));
+
+  function dataViz(incomingData) {
+    var maxPopulation = d3.max(incomingData, d => parseInt(d.population));
+
+    var yScale = d3.scaleLinear()
+    .domain([0, maxPopulation])
+    .range([0, 460]);
+
+    d3.select("svg")
+    .attr("style", "height: 480px; width: 600px;");
+
+    d3.select("svg")
+      .selectAll("rect")
+      .data(incomingData)
+      .enter()
+      .append("rect")
+      .attr("width", 50)
+      .attr("height", d => yScale(parseInt(d.population)))
+      .attr("x", (d, i) => i * 60)
+      .attr("y", 0)
+      .style("fill", "#FE9922")
+      .style("stroke", "#9A8B7A")
+      .style("stroke-width", "1px");
+  }
+</script>
+
+</html>
