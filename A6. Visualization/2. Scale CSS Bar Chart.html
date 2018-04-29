@@ -6,7 +6,7 @@
   <title>CSS Bar Chat</title>
   <script type="text/javascript" src="../lib/d3v4l.js"></script>
   <style>
-    .chart div {
+    .css-bar {
       min-height: 25px;
       min-width: 24px;
       background-color: steelblue;
@@ -21,21 +21,32 @@
     }
   </style>
 </head>
+
 <body>
   <div class="chart">
   </div>
   <script type="text/javascript">
     var data = [4, 8, 15, 16, 23, 42];
+
+    //setup scaling
+    var xscale = d3.scaleLinear()
+      .domain([0, d3.max(data)]) //x=0 y=0. Known X Axis
+      .range([0, 420]); //desired width of the chart x=42 y=420. Known Y Axis
+
+    //enter
     d3.select(".chart")
       .selectAll("div")
-      .data(data)
-      .enter().append("div")
+      .data(data).enter()
+      .append("div")
+      //update
       .style("width", function(d) {
-        return d + "px"; //magic number
+        return xscale(d);
       })
+      .attr("class", "css-bar")
       .text(function(d) {
         return d;
       });
   </script>
 </body>
+
 </html>
