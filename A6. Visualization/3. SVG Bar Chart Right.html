@@ -29,9 +29,9 @@
 <script>
   var data = [4, 8, 15, 16, 23, 42];
 
-  var height = 150;
-  barWidth = 25,
-    barYPosition = 25;
+  var SVGheight = 150;
+  barHeight = 25,
+  barYPosition = 25;
   var datamax = d3.max(data)*10;
 
   var scale = d3.scaleLinear()
@@ -40,7 +40,7 @@
 
   var SVGchart = d3.selectAll(".chart") //focus per element
     .attr("width", datamax) //width variable 420
-    .attr("height", height);
+    .attr("height", SVGheight);
 
   var bar = SVGchart.selectAll("g") //focus per element
     .data(data)
@@ -52,7 +52,7 @@
 
   bar.append("rect")
     .attr("width", scale)
-    .attr("height", barWidth - 3);
+    .attr("height", barHeight - 3);
 
   bar.append("text")
     .attr("x", 15)
