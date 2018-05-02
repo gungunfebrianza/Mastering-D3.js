@@ -1,50 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
 
 <head>
   <meta charset="utf-8">
-  <title>SVG Bar Chart Top</title>
+  <title>SVG Bar Chart Left</title>
   <script type="text/javascript" src="../lib/d3v4l.js"></script>
   <style>
-    svg {
-      padding: 5px 5px;
-      border: 1px solid;
+    .chart text {
+      fill: white;
+      font: 10px sans-serif;
+      text-anchor: end;
     }
   </style>
 </head>
 
 <body>
-  <svg>
+  <svg class="chart"></svg>
 
-  </svg>
 </body>
-
 <script>
-  d3.csv("http://localhost/front-end/mastering-d3.js/data/cities.csv", data => dataViz(data));
+  var data = [4, 8, 15, 16, 23, 42];
 
-  function dataViz(incomingData) {
-    var maxPopulation = d3.max(incomingData, d => parseInt(d.population));
+  var SVGheight = d3.max(data) * 10,
+  SVGWidth = barXPosition*data.length,
+  barWidth = 30,
+  barXPosition = 33;
 
-    var yScale = d3.scaleLinear()
-    .domain([0, maxPopulation])
-    .range([0, 460]);
+  var scale = d3.scaleLinear()
+  .domain([0, d3.max(data)])
+  .range([0, d3.max(data) * 10]);
 
-    d3.select("svg")
-    .attr("style", "height: 480px; width: 600px;");
+  var SVGchart = d3.selectAll(".chart")
+    .attr("width", barXPosition*data.length)
+    .attr("height", SVGheight)
+    .style("padding", "5px 5px")
+    .style("border", "1px solid");
 
-    d3.select("svg")
-      .selectAll("rect")
-      .data(incomingData)
-      .enter()
-      .append("rect")
-      .attr("width", 50)
-      .attr("height", d => yScale(parseInt(d.population)))
-      .attr("x", (d, i) => i * 60)
-      .attr("y", 0)
-      .style("fill", "#FE9922")
-      .style("stroke", "#9A8B7A")
-      .style("stroke-width", "1px");
-  }
+  var bar = SVGchart.selectAll("g") //focus per element
+    .data(data)
+    .enter().append("g")
+    //transform
+    .attr("transform", function(d, i) {
+      return "translate(" + i * barXPosition + ", 0)";
+    });
+
+  bar.append("rect")
+    .attr("width", barWidth)
+    .attr("height", scale)
+    .style("fill", "steelblue");
+
+  bar.append("text")
+  .attr("x", 20)
+  .attr("y", function(d){
+    return (d*10)-10;
+  })
+  .text(function(d){
+    return d;
+  });
+
 </script>
 
 </html>
