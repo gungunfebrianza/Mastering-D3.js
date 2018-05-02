@@ -1,50 +1,67 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
 
 <head>
   <meta charset="utf-8">
-  <title>SVG Bar Chart Top</title>
+  <title>SVG Bar Chart Bottom</title>
   <script type="text/javascript" src="../lib/d3v4l.js"></script>
   <style>
-    svg {
-      padding: 5px 5px;
-      border: 1px solid;
+    .chart text {
+      fill: white;
+      font: 10px sans-serif;
+      text-anchor: end;
     }
   </style>
 </head>
 
 <body>
-  <svg>
+  <svg class="chart"></svg>
 
-  </svg>
 </body>
-
 <script>
-  d3.csv("http://localhost/front-end/mastering-d3.js/data/cities.csv", data => dataViz(data));
+  //1. Prepare The Data
+  var data = [4, 8, 15, 16, 23, 42];
 
-  function dataViz(incomingData) {
-    var maxPopulation = d3.max(incomingData, d => parseInt(d.population));
+  //2. UI Component Properties
+  var SVGHeight = d3.max(data)*10,
+  barWidth = 30;
+  barXposition = 33;
+  SVGWidth = barXposition*data.length;
 
-    var yScale = d3.scaleLinear()
-    .domain([0, maxPopulation])
-    .range([0, 460]);
+  //3. Scaling
+  var scale = d3.scaleLinear()
+  .domain([0, d3.max(data)])
+  .range([0, d3.max(data) * 10]);
 
-    d3.select("svg")
-    .attr("style", "height: 480px; width: 600px;");
+  //4. Chart
+  var SVGchart = d3.select(".chart")
+  .style("padding", "5px 5px")
+  .style("border", "1px solid")
+  .attr("width", SVGWidth)
+  .attr("height", SVGHeight);
 
-    d3.select("svg")
-      .selectAll("rect")
-      .data(incomingData)
-      .enter()
-      .append("rect")
-      .attr("width", 50)
-      .attr("height", d => yScale(parseInt(d.population)))
-      .attr("x", (d, i) => i * 60)
-      .attr("y", d => 480 - yScale(parseInt(d.population)))
-      .style("fill", "#FE9922")
-      .style("stroke", "#9A8B7A")
-      .style("stroke-width", "1px");
-  }
+  //5. Container
+  var g = SVGchart.selectAll("g")
+  .data(data)
+  .enter().append('g')
+  .attr('transform', function(d,i){
+    return "translate(" + i * barXposition + "," + (d3.max(data)*10 - scale(d)) + ")";
+  });
+
+  //6. Add Bar
+  var bar = g.append('rect')
+  .style("fill","steelblue")
+  .attr('width', barWidth)
+  .attr('height', scale);
+
+  //7. Add Text
+  var text = g.append("text")
+  .attr('x', 20)
+  .attr('y', 20)
+  .text(function(d){
+    return d;
+  });
+
 </script>
 
 </html>

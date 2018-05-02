@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>SVG Bar Chart Left</title>
+  <title>SVG Bar Chart Top</title>
   <script type="text/javascript" src="../lib/d3v4l.js"></script>
   <style>
     .chart text {
@@ -19,44 +19,50 @@
 
 </body>
 <script>
+  //1. Prepare The Data
   var data = [4, 8, 15, 16, 23, 42];
 
-  var SVGheight = d3.max(data) * 10,
-  SVGWidth = barXPosition*data.length,
+  //2. UI Component Properties
+  var SVGHeight = d3.max(data)*10,
   barWidth = 30,
-  barXPosition = 33;
+  barXposition = 33,
+  SVGWidth = barXposition*data.length;
 
+  //3. Scaling
   var scale = d3.scaleLinear()
   .domain([0, d3.max(data)])
-  .range([0, d3.max(data) * 10]);
+  .range([0, d3.max(data)*10]);
 
-  var SVGchart = d3.selectAll(".chart")
-    .attr("width", barXPosition*data.length)
-    .attr("height", SVGheight)
-    .style("padding", "5px 5px")
-    .style("border", "1px solid");
+  //4. Chart
+  var SVGChart = d3.select(".chart")
+  .style("padding", "5px 5px")
+  .style("border", "1px solid")
+  .attr('width', SVGWidth)
+  .attr('height', SVGHeight);
 
-  var bar = SVGchart.selectAll("g") //focus per element
-    .data(data)
-    .enter().append("g")
-    //transform
-    .attr("transform", function(d, i) {
-      return "translate(" + i * barXPosition + ", 0)";
-    });
+  //5. Container
+  var g = SVGChart.selectAll("g")
+  .data(data)
+  .enter().append("g")
+  .attr("transform", function(d,i){
+    return "translate(" + i * barXposition + ",0)";
+  });
 
-  bar.append("rect")
-    .attr("width", barWidth)
-    .attr("height", scale)
-    .style("fill", "steelblue");
+  //6. Add Bar
+  var bar = g.append("rect")
+  .style("fill", "steelblue")
+  .attr('width', barWidth)
+  .attr('height', scale);
 
-  bar.append("text")
-  .attr("x", 20)
-  .attr("y", function(d){
+  //7. Add Text
+  g.append("text")
+  .attr('x', 20)
+  .attr('y', function(d){
     return (d*10)-10;
   })
   .text(function(d){
     return d;
-  });
+  })
 
 </script>
 
