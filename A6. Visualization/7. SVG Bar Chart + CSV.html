@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>SVG Bar Chart Top</title>
+  <script type="text/javascript" src="../lib/d3v4l.js"></script>
+</head>
+
+<body>
+  <svg class="chart">
+
+  </svg>
+</body>
+
+<script>
+  //1. Prepare The Data
+
+  d3.csv("http://localhost/front-end/mastering-d3.js/data/cities.csv", data => visualize(data));
+
+  function visualize(data){
+    //2. UI Component Properties
+    var maxDataPopulation =  d3.max(data, d => parseInt(d.population))*10,
+    SVGHeight = maxDataPopulation + 10;
+    barWidth = 60,
+    barXPosition = 63,
+    SVGWidth = barXPosition*data.length;
+
+    //3. Y Scaling
+    var scale = d3.scaleLinear()
+    .domain([0, d3.max(data, d => parseInt(d.population))])
+    .range([0, SVGWidth+10]);
+
+    //4. SVG Chart
+    var SVGChart = d3.select(".chart")
+    .style("padding","5px 5px")
+    .style("border", "1px solid")
+    .attr('width', SVGWidth)
+    .attr('height', 550);
+
+    //5. Container
+    var g = SVGChart.selectAll("g")
+    .data(data)
+    .enter().append('g')
+    .attr('transform', function(d,i){
+      return "translate(" + i * barXPosition + "," + (550 - scale(d.population)) +")";
+    });
+
+    //6. Add Bar
+    let bar = g.append("rect")
+    .style("fill", "#FE9922")
+    .style("stroke", "#9A8B7A")
+    .style("stroke-width", "1px")
+    .attr('width', barWidth)
+    .attr("height", function(d){
+      return scale(d.population);
+    });
+
+    //7. Add Text
+    let text = g.append('text')
+    .style("fill", "black")
+    .style("font", "10px sans-serif")
+    .style("text-anchor", "end")
+    .attr('x', 52)
+    .attr('y', -10)
+    .text(function(d){
+      return d.population;
+    });
+  }
+
+</script>
+
+</html>
